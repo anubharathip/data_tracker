@@ -1,0 +1,240 @@
+#ug project code
+import pandas as pd
+import numpy as np
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+train = pd.read_csv('../input/students-adaptability-level-in-online-education/students_adaptability_level_online_education.csv')
+train.info()
+train.isnull().sum()
+train.describe()
+data.replace("Boy","Male",inplace=True)
+data.replace("Girl","Female",inplace=True)
+data.replace("Mid","Middle",inplace=True)
+data.replace("Poor","Lower",inplace=True)
+data.replace("Rich","Upper",inplace=True)
+random.shuffle(colors)
+plt.figure(figsize=(15,10))
+plt.subplot(2,2,1)
+un, count = np.unique(data[data.Gender == "Male"]["Adaptivity Level"].values,return_counts=True)
+plt.bar(un, count, color=colors)
+plt.title("Adaptivity Level for Males")
+plt.xlabel("Adaptivity Level")
+plt.ylabel("Count")
+plt.subplot(2,2,2)
+un, count = np.unique(data[data.Gender == "Female"]["Adaptivity Level"].values,return_counts=True)
+plt.bar(un, count, color=colors)
+plt.title("Adaptivity Level for Females")
+plt.xlabel("Adaptivity Level")
+plt.ylabel("Count")
+
+plt.tight_layout()
+random.shuffle(colors)
+plt.figure(figsize=(15,10))
+graphs = 1
+for i in np.unique(data.Age.values):
+    plt.subplot(2,3,graphs)
+    un, count = np.unique(data[data.Age == i]["Adaptivity Level"].values, return_counts=True)
+    count, un = zip(*sorted(zip(count, un), reverse=True))
+    plt.bar(un, count, color = colors)
+    plt.title("Adaptivity Level for Age group " + i)
+    plt.xlabel("Age group")
+    plt.ylabel("Count")
+    graphs = graphs + 1
+plt.tight_layout()
+random.shuffle(colors)
+plt.figure(figsize=(15,10))
+graphs = 1
+for i in np.unique(data["Education Level"].values):
+    plt.subplot(2,3,graphs)
+    un, count = np.unique(data[data["Education Level"] == i]["Adaptivity Level"].values, return_counts=True)
+    count, un = zip(*sorted(zip(count, un), reverse=True))
+    plt.bar(un, count, color = colors)
+    plt.title("Adaptivity Level for " + i)
+    plt.xlabel("Adaptivity Level")
+    plt.ylabel("Count")
+    graphs = graphs + 1
+plt.tight_layout()
+random.shuffle(colors)
+plt.figure(figsize=(20,10))
+graphs = 1
+for i in np.unique(data["Institution Type"].values):
+    plt.subplot(2,3,graphs)
+    un, count = np.unique(data[data["Institution Type"] == i]["Adaptivity Level"].values, return_counts=True)
+    count, un = zip(*sorted(zip(count, un), reverse=True))
+    plt.bar(un, count, color = colors)
+    plt.title("Adaptivity Level for " + i + " Institution")
+    plt.xlabel("Adaptivity Level")
+    plt.ylabel("Count")
+    graphs = graphs + 1
+plt.tight_layout()
+random.shuffle(colors)
+plt.figure(figsize=(20,10))
+graphs = 1
+for i in np.unique(data["IT Student"].values):
+    plt.subplot(2,3,graphs)
+    un, count = np.unique(data[data["IT Student"] == i]["Adaptivity Level"].values, return_counts=True)
+    count, un = zip(*sorted(zip(count, un), reverse=True))
+    plt.bar(un, count, color = colors)
+    plt.title("Is IT Student? : " + i)
+    plt.xlabel("Adaptivity Level")
+    plt.ylabel("Count")
+    graphs = graphs + 1
+plt.tight_layout()
+random.shuffle(colors)
+plt.figure(figsize=(20,10))
+graphs = 1
+for i in np.unique(data["Location"].values):
+    plt.subplot(2,3,graphs)
+    un, count = np.unique(data[data["Location"] == i]["Adaptivity Level"].values, return_counts=True)
+    count, un = zip(*sorted(zip(count, un), reverse=True))
+    plt.bar(un, count, color = colors)
+    plt.title("Is student in Location? : " + i)
+    plt.xlabel("Adaptivity Level")
+    plt.ylabel("Count")
+    graphs = graphs + 1
+plt.tight_layout()
+random.shuffle(colors)
+plt.figure(figsize=(20,10))
+graphs = 1
+for i in np.unique(data["Load-shedding"].values):
+    plt.subplot(2,3,graphs)
+    un, count = np.unique(data[data["Load-shedding"] == i]["Adaptivity Level"].values, return_counts=True)
+    count, un = zip(*sorted(zip(count, un), reverse=True))
+    plt.bar(un, count, color = colors)
+    plt.title("Load shedding frequency? : " + i)
+    plt.xlabel("Adaptivity Level")
+    plt.ylabel("Count")
+    graphs = graphs + 1
+plt.tight_layout()
+random.shuffle(colors)
+plt.figure(figsize=(20,10))
+graphs = 1
+for i in np.unique(data["Financial Condition"].values):
+    plt.subplot(2,3,graphs)
+    un, count = np.unique(data[data["Financial Condition"] == i]["Adaptivity Level"].values, return_counts=True)
+    count, un = zip(*sorted(zip(count, un), reverse=True))
+    plt.bar(un, count, color = colors)
+    plt.title("Financial Condition : " + i)
+    plt.xlabel("Adaptivity Level")
+    plt.ylabel("Count")
+    graphs = graphs + 1
+plt.tight_layout()
+random.shuffle(colors)
+plt.figure(figsize=(20,10))
+graphs = 1
+for i in np.unique(data["Internet Type"].values):
+
+
+#pg project 1
+#Prepare R environment
+# Install packages
+install.packages("tm") # for text mining
+install.packages("wordcloud2") # word-cloud generator 
+install.packages("RColorBrewer") # color palettes
+# Load
+library("tm")
+library("wordcloud2")
+library("RColorBrewer")
+# Work directory setting 
+setwd("../input/chapter-i-data-science-big-data-analytics")
+#Loading txt file and reading its content
+# Read text file 
+text <- readLines(file("data_science__big_data_analysis.txt")) #Manually select the file
+# Load the data as a corpus
+docs <- Corpus(VectorSource(text))
+# Inspect contents
+inspect(docs)
+#Text cleaning & transformation
+# Text transformation
+## replace special characters “/”, “@” and “|” with space:
+### Note: following this same syntax you could remove other special characters as %, $, etc.
+toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+docs <- tm_map(docs, toSpace, "/")
+docs <- tm_map(docs, toSpace, "@")
+docs <- tm_map(docs, toSpace, "\\|")
+docs <- tm_map(docs, toSpace, "●")
+# Convert the text to lower case
+docs <- tm_map(docs, content_transformer(tolower))
+# Remove numbers
+docs <- tm_map(docs, removeNumbers)
+# Remove english common stopwords
+docs <- tm_map(docs, removeWords, stopwords("english"))
+# Remove your own stop word
+# specify your stopwords as a character vector
+docs <- tm_map(docs, removeWords, c("blabla1", "blabla2"))
+# Remove punctuations
+docs <- tm_map(docs, removePunctuation)
+# Eliminate extra white spaces
+docs <- tm_map(docs, stripWhitespace)
+# build a document-term matrix
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+word_1 <- data.frame(word = names(v),freq=v)
+head(word_1, 10)
+# Generate word cloud
+wordcloud2(word_1, 
+size = 4, #letters size
+minRotation = -pi/6, maxRotation = -pi/6, rotateRatio = 1, #skewing the letters
+color = "random-dark", #letters color
+backgroundColor = "#f5f5dc" #background color
+)
+
+#pg project 2
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix
+from sklearn.preprocessing import StandardScaler,LabelEncoder
+from sklearn.model_selection import train_test_split,GridSearchCV,cross_val_s
+core
+%matplotlib inline
+import os
+for dirname, _, filenames in os.walk('/kaggle/input'):
+ for filename in filenames:
+ print(os.path.join(dirname, filename))
+df = pd.read_csv('/content/SeoulBikeData.csv',encoding='unicode_escape')
+df.head(5)
+df.columns=df.columns.str.replace(' ',"_")
+df.head(2)
+df.isnull().sum()
+df.value_counts()
+df['Rented_Bike_Count'].value_counts()
+df['Rented_Bike_Count'].min()
+df['Rented_Bike_Count'].median()
+def countsplit(df):
+ for i in range (8760):
+ if df.at[i,'Rented_Bike_Count']<400:
+ df.at[i,'Rented_Bike_Count']=0
+ elif df.at[i,'Rented_Bike_Count']>1000:
+ df.at[i,'Rented_Bike_Count']=2
+ else:
+ df.at[i,'Rented_Bike_Count']=1
+countsplit(df)
+df['Rented_Bike_Count'].value_counts()
+fig,ax = plt.subplots(figsize=(20,10))
+sns.barplot(x='Rented_Bike_Count',y='Temperature(°C)',data=df,ax=ax)
+l = LabelEncoder()
+df['Date']=l.fit_transform(df['Date'])
+df['Seasons']=l.fit_transform(df['Seasons'])
+df['Holiday']=l.fit_transform(df['Holiday'])
+df['Functioning_Day']=l.fit_transform(df['Functioning_Day'])
+x=df.drop(['Rented_Bike_Count'],axis=1)
+y=df['Rented_Bike_Count']
+xtrain,xtest,ytrain,ytest = train_test_split(x,y,test_size=0.2,random_state=4
+2)
+sc = StandardScaler()
+xtrain=sc.fit_transform(xtrain)
+xtest=sc.fit_transform(xtest)
+rfc = RandomForestClassifier(n_estimators=200)
+rfc.fit(xtrain,ytrain)
+rfc.score(xtest,ytest)
+lr=LogisticRegression()
+lr.fit(xtrain,ytrain)
+lr.score(xtest,ytest)
